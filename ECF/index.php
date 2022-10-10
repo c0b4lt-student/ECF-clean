@@ -38,26 +38,26 @@ try {
               }
             }
             break; //partner/uuid/perms
-          case "gyms": echo "données JSON des salles";
+          case "gyms": $api_controller->getGyms();
             break;
           case "gym":
             if (empty($url[2]))
               throw new Exception("404 not found");
             else if (empty($url[3])) {
-              echo "données JSON des permissions";
+              $api_controller->getGym($url[2]);
             } else {
               switch ($url[3]) {
-                case "partner": echo "Données JSON du partenaire de la salle".$url[2];
+                case "partner": $api_controller->getGymPartner($url[2]);
                   break;
-                case "perms": echo "Données JSON des permissions de la salle".$url[2];
+                case "perms": $api_controller->getGymPerms($url[2]);
                   break;
-                case "manager": echo "Données JSON du manager de la salle".$url[2];
+                case "manager": $api_controller->getGymManager($url[2]);
                   break;
                 default: throw new Exception("404 not found");
               }
             }
             break;
-          case "perms": echo "Données JSON des permissions";
+          case "perms": $api_controller->getPerms();
             break;
           default: throw new Exception("404 not found");
         }
