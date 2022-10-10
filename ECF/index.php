@@ -24,14 +24,14 @@ try {
             if (empty($url[2]))
               throw new Exception("404 not found");
             else if (empty($url[3])) {
-              echo "Données JSON du partenaire".$url[2];
+              $api_controller->getPartner($url[2]);
             } else {
               switch ($url[3]) {
-                case "perms": echo "Données JSON des permissions globale du partenaire".$url[2];
+                case "perms": $api_controller->getPartnerPerms($url[2]);
                   break;
-                case "gyms": echo "Données JSON des salles du partenaire".$url[2];
+                case "gyms": $api_controller->getPartnerGyms($url[2]);
                   break;
-                case "managers": echo "Données JSON des managers du partenaire".$url[2];
+                case "managers": $api_controller->getPartnerManagers($url[2]);
                   break;
                 default:
                   throw new Exception("404 not found");
