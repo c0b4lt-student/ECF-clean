@@ -1,5 +1,8 @@
 <?php
 require_once __DIR__."/../../models/front/API.requester.php";
+//echo "<pre>";
+//      print_r($gyms);
+//      echo "</pre>";
   class APIController {
     private $requester;
 
@@ -12,37 +15,72 @@ require_once __DIR__."/../../models/front/API.requester.php";
       echo "<pre>";
       print_r($partners);
       echo "</pre>";
+      return $partners;
     }
     public function getPartner($id_partner) {
-      echo "Envois des données JSON du partenaire ".$id_partner;
+      $partner = $this->requester->getDBPartner($id_partner);
+      echo "<pre>";
+      print_r($partner);
+      echo "</pre>";
+      return $partner;
     }
     public function getPartnerPerms($id_partner) {
-      echo "Envois des données JSON des permissions globales du partenaire ".$id_partner;
+      $perms = $this->requester->getDBPartnerPerms($id_partner);
+      echo "<pre>";
+      print_r($perms);
+      echo "</pre>";
+      return $perms;
     }
     public function getPartnerGyms($id_partner) {
-      echo "Envois des données JSON des salles du partenaire ".$id_partner;
+      $gyms = $this->requester->getDBPartnerGyms($id_partner);
+      echo "<pre>";
+      print_r($gyms);
+      echo "</pre>";
+      return $gyms;
     }
     public function getPartnerManagers($id_partner) {
-      echo "Envois des données JSON des managers du partenaire ".$id_partner;
+      $managers = $this->requester->getDBPartnerManagers($id_partner);
+      echo "<pre>";
+      print_r($managers);
+      echo "</pre>";
+      return $managers;
     }
 
     public function getGyms() {
-      echo "Envois des données JSON des salles";
+      $gyms = $this->requester->getDBGyms();
+      echo "<pre>";
+      print_r($gyms);
+      echo "</pre>";
     }
     public function getGym($id_gym) {
-      echo "Envois des données JSON de la salle ".$id_gym;
+      $gym = $this->requester->getDBGym($id_gym);
+      echo "<pre>";
+      print_r($gym);
+      echo "</pre>";
     }
     public function getGymPerms($id_gym) {
-      echo "Envois des données JSON des permissions de la salle ".$id_gym;
+      $perms = $this->requester->getDBGymPerms($id_gym);
+      echo "<pre>";
+      print_r($perms);
+      echo "</pre>";
     }
     public function getGymManager($id_gym) {
-      echo "Envois des données JSON du manager de la salle ".$id_gym;
+      $manager = $this->requester->getDBGymManager($id_gym);
+      echo "<pre>";
+      print_r($manager);
+      echo "</pre>";
     }
     public function getGymPartner($id_gym) {
-      echo "Envois des données JSON du partenaire de la salle ".$id_gym;
+      $partner = $this->requester->getDBGymPartner($id_gym);
+      echo "<pre>";
+      print_r($partner);
+      echo "</pre>";
     }
 
     public function getPerms() {
-      echo "Envois des données JSON des permissions";
+      $perms = $this->requester->getDBPerms();
+      echo "<pre>";
+      print_r($perms);
+      echo "</pre>";
     }
   }
