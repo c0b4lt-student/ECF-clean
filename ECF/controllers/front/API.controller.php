@@ -1,7 +1,17 @@
 <?php
+require_once __DIR__."/../../models/front/API.requester.php";
   class APIController {
+    private $requester;
+
+    public function __construct() {
+      $this->requester = new APIRequester();
+    }
+
     public function getPartners() {
-      echo "Envoies des données JSON des partenaires";
+      $partners = $this->requester->getDBPartners();
+      echo "<pre>";
+      print_r($partners);
+      echo "</pre>";
     }
     public function getPartner($id_partner) {
       echo "Envois des données JSON du partenaire ".$id_partner;

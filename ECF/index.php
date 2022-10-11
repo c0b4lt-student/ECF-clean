@@ -11,7 +11,7 @@ try {
   if (empty($_GET['page'])) {
     throw new Exception("404 not found");
   } else {
-    //Filtre l'url, et l explose dans un tableau pour simplifier les requetes : /partner/ajout/jean-claude.... = ['partner', 'ajout', 'Jean-claude', '...'];
+    //Filtre l'url, et l'explose dans un tableau pour simplifier les requetes : /partner/ajout/jean-claude.... = ['partner', 'ajout', 'Jean-claude', '...'];
     $url = explode("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));
     if (empty($url[0]) || empty($url[1])) //Je VEUX un url/back/quelquechose
       throw new Exception("404 not found");
