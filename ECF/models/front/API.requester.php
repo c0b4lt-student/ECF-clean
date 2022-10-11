@@ -25,8 +25,10 @@
           $partner = $stmt->fetch(PDO::FETCH_ASSOC);
           $stmt->closeCursor();
           return $partner;
-        } else
-          throw new Exception("Plusieurs ou aucuns partenaires avec l'id ".$partner_id);
+        } else {
+          $stmt->closeCursor();
+          throw new Exception("Plusieurs ou aucuns partenaires avec l'id " . $partner_id);
+        }
       } else
         throw new Exception("pdo->execute($req) failed");
     }
@@ -98,8 +100,10 @@
           $gym = $stmt->fetch(PDO::FETCH_ASSOC);
           $stmt->closeCursor();
           return $gym;
-        } else
-          throw new Exception("pdo->execute($req) : aucuns resultat");
+        } else {
+          $stmt->closeCursor();
+          throw new Exception("pdo->execute($req) : aucuns ou trop de resultat");
+        }
       } else {
         throw new Exception("pdo->execute($req) failed");
       }
@@ -121,10 +125,51 @@
       }
     }
     public function getDBGymManager($id_gym) {
+      $req = "SELECT m.* FROM managers m
+                LEFT JOIN gyms g on m.id_manager = g.id_manager
+                    WHERE g.id_gym = $id_gym";
+      $stmt = $this->getDB()->prepare($req);
+      if ($stmt->execute()) {
+        if ($stmt->rowCount() === 1) {
+          $manager = $stmt->fetch(PDO::FETCH_ASSOC);
+          $stmt->closeCursor();
+          return $manager;
+        } else {
+          $stmt->closeCursor();
+          throw new Exception("pdo->execute($req) : aucuns resultats ou trop de resultats");
+        }
+      } else
+        throw new Exception("pdo->execute($req) : failed");
     }
     public function getDBGymPartner($id_gym) {
+      $req = "SELECT p.* FROM partners p
+                LEFT JOIN gyms g on p.id_partner = g.id_partner
+                    WHERE g.id_gym = $id_gym";
+      $stmt = $this->getDB()->prepare($req);
+      if ($stmt->execute()) {
+        if ($stmt->rowCount() === 1) {
+          $partner = $stmt->fetch(PDO::FETCH_ASSOC);
+          $stmt->closeCursor();
+          return $partner;
+        } else {
+          $stmt->closeCursor();
+          throw new Exception("pdo->execute($req) : aucuns ou trop de resultats");
+        }
+      } else
+        throw new Exception("pdo->execute($req) : failed");
     }
 
-    public function getPerms() {
+    public function getDBPerms() {
+      $req = "SELECT * FROM perms";
+      $stmt = $this->getDB()->prepare($req);
+      if ($stmt->execute()) {
+        if ($stmt->rowCount() >= 1) {
+          $perms = $stmt->fetchALL(PDO::FETCH_ASSOC);
+          $stmt->closeCursor();
+          return $perms;
+        } else
+          throw new Exception("pdo->execute($req) : aucuns resultat");
+      } else
+        throw new Exception("pdo->execute($req) : failed");
     }
   }
