@@ -1,8 +1,7 @@
 <?php
 require_once __DIR__."/../../models/front/API.requester.php";
-//echo "<pre>";
-//      print_r($gyms);
-//      echo "</pre>";
+require_once __DIR__."/../../models/Model.php";
+
   class APIController {
     private $requester;
 
@@ -12,75 +11,48 @@ require_once __DIR__."/../../models/front/API.requester.php";
 
     public function getPartners() {
       $partners = $this->requester->getDBPartners();
-      echo "<pre>";
-      print_r($partners);
-      echo "</pre>";
-      return $partners;
+      Model::sendJSON($partners);
     }
     public function getPartner($id_partner) {
       $partner = $this->requester->getDBPartner($id_partner);
-      echo "<pre>";
-      print_r($partner);
-      echo "</pre>";
-      return $partner;
+      Model::sendJSON($partner);
     }
     public function getPartnerPerms($id_partner) {
       $perms = $this->requester->getDBPartnerPerms($id_partner);
-      echo "<pre>";
-      print_r($perms);
-      echo "</pre>";
-      return $perms;
+      Model::sendJSON($perms);
     }
     public function getPartnerGyms($id_partner) {
       $gyms = $this->requester->getDBPartnerGyms($id_partner);
-      echo "<pre>";
-      print_r($gyms);
-      echo "</pre>";
-      return $gyms;
+      Model::sendJSON($gyms);
     }
     public function getPartnerManagers($id_partner) {
       $managers = $this->requester->getDBPartnerManagers($id_partner);
-      echo "<pre>";
-      print_r($managers);
-      echo "</pre>";
-      return $managers;
+      Model::sendJSON($managers);
     }
 
     public function getGyms() {
       $gyms = $this->requester->getDBGyms();
-      echo "<pre>";
-      print_r($gyms);
-      echo "</pre>";
+      Model::sendJSON($gyms);
     }
     public function getGym($id_gym) {
       $gym = $this->requester->getDBGym($id_gym);
-      echo "<pre>";
-      print_r($gym);
-      echo "</pre>";
+      Model::sendJSON($gym);
     }
     public function getGymPerms($id_gym) {
       $perms = $this->requester->getDBGymPerms($id_gym);
-      echo "<pre>";
-      print_r($perms);
-      echo "</pre>";
+      Model::sendJSON($perms);
     }
     public function getGymManager($id_gym) {
       $manager = $this->requester->getDBGymManager($id_gym);
-      echo "<pre>";
-      print_r($manager);
-      echo "</pre>";
+      Model::sendJSON($manager);
     }
     public function getGymPartner($id_gym) {
       $partner = $this->requester->getDBGymPartner($id_gym);
-      echo "<pre>";
-      print_r($partner);
-      echo "</pre>";
+      Model::sendJSON($partner);
     }
 
     public function getPerms() {
       $perms = $this->requester->getDBPerms();
-      echo "<pre>";
-      print_r($perms);
-      echo "</pre>";
+      Model::sendJSON($perms);
     }
   }

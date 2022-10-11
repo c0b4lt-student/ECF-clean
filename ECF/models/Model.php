@@ -13,4 +13,10 @@ abstract class Model {
       self::connectDB();
     return self::$pdo;
   }
+
+  public static function sendJSON($data) {
+    header("Access-Control-Allow-Origin: *");//Remplacer l'etoile une fois en production
+    header("Content-Type: application/json");
+    echo json_encode($data);
+  }
 }

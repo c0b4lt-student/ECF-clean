@@ -17,9 +17,12 @@
         throw new Exception("pdo->execute($req) failed");
     }
     public function getDBPartner($partner_id) {
+      if (!ctype_digit($partner_id) || $partner_id == 0)
+        throw new Exception('Parametre invalide');
       $req = "SELECT * FROM partners
-                WHERE id_partner = $partner_id";
+                WHERE id_partner = :partner_id";
       $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':partner_id', $partner_id, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() === 1) {
           $partner = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -33,10 +36,13 @@
         throw new Exception("pdo->execute($req) failed");
     }
     public function getDBPartnerPerms($partner_id) {
+      if (!ctype_digit($partner_id) || $partner_id == 0)
+        throw new Exception('Parametre invalide');
       $req = "SELECT perms.* FROM perms
                 LEFT JOIN partners_auth pa on perms.id_perm = pa.id_perm
-                WHERE pa.id_partner = $partner_id";
+                WHERE pa.id_partner = :partner_id";
       $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':id_partner', $partner_id, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() >= 1) {
           $perms = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -48,9 +54,12 @@
         throw new Exception("pdo->execute($req) failed");
     }
     public function getDBPartnerGyms($partner_id) {
+      if (!ctype_digit($partner_id) || $partner_id == 0)
+        throw new Exception('Parametre invalide');
       $req = "SELECT g.* FROM gyms g
-                WHERE g.id_partner = $partner_id";
+                WHERE g.id_partner = :partner_id";
       $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':partner_id', $partner_id, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() >= 1) {
           $gyms = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -62,11 +71,14 @@
         throw new Exception("pdo->execute($req) failed");
     }
     public function getDBPartnerManagers($partner_id) {
+      if (!ctype_digit($partner_id) || $partner_id == 0)
+        throw new Exception('Parametre invalide');
       $req = "SELECT m.* FROM managers m
                 LEFT JOIN gyms g on m.id_manager = g.id_manager
                 RIGHT JOIN partners p on p.id_partner = g.id_partner
-                WHERE g.id_partner = $partner_id";
+                WHERE g.id_partner = :partner_id";
       $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':partner_id', $partner_id, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() >= 1) {
           $managers = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -92,9 +104,12 @@
         throw new Exception("pdo->execute($req) failed");
     }
     public function getDBGym($id_gym) {
+      if (!ctype_digit($id_gym) || $id_gym == 0)
+        throw new Exception('Parametre invalide');
       $req = "SELECT * FROM gyms
-                WHERE id_gym = $id_gym";
+                WHERE id_gym = :id_gym";
       $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':id_gym', $id_gym, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() === 1) {
           $gym = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -109,10 +124,13 @@
       }
     }
     public function getDBGymPerms($id_gym) {
+      if (!ctype_digit($id_gym) || $id_gym == 0)
+        throw new Exception('Parametre invalide');
       $req = "SELECT perms.* fROM perms
                 LEFT JOIN gyms_auth ga on perms.id_perm = ga.id_perm
-                WHERE ga.id_gym = $id_gym";
+                WHERE ga.id_gym = :id_gym";
       $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':id_gym', $id_gym, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() >= 1) {
           $perms = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -125,10 +143,13 @@
       }
     }
     public function getDBGymManager($id_gym) {
+      if (!ctype_digit($id_gym) || $id_gym == 0)
+        throw new Exception('Parametre invalide');
       $req = "SELECT m.* FROM managers m
                 LEFT JOIN gyms g on m.id_manager = g.id_manager
-                    WHERE g.id_gym = $id_gym";
+                    WHERE g.id_gym = :id_gym";
       $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':id_gym', $id_gym, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() === 1) {
           $manager = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -142,10 +163,13 @@
         throw new Exception("pdo->execute($req) : failed");
     }
     public function getDBGymPartner($id_gym) {
+      if (!ctype_digit($id_gym) || $id_gym == 0)
+        throw new Exception('Parametre invalide');
       $req = "SELECT p.* FROM partners p
                 LEFT JOIN gyms g on p.id_partner = g.id_partner
-                    WHERE g.id_gym = $id_gym";
+                    WHERE g.id_gym = :id_gym";
       $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':id_gym', $id_gym, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() === 1) {
           $partner = $stmt->fetch(PDO::FETCH_ASSOC);
