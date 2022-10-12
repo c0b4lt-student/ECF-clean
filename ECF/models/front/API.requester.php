@@ -1,6 +1,5 @@
 <?php
   require_once __DIR__."/../Model.php";
-//throw new Exception("pdo->execute($req) failed");
   class APIRequester extends Model {
     public function getDBPartners() {
       $req = "SELECT * FROM partners";
@@ -42,7 +41,7 @@
                 LEFT JOIN partners_auth pa on perms.id_perm = pa.id_perm
                 WHERE pa.id_partner = :partner_id";
       $stmt = $this->getDB()->prepare($req);
-      $stmt->bindValue(':id_partner', $partner_id, PDO::PARAM_INT);
+      $stmt->bindValue(':partner_id', $partner_id, PDO::PARAM_INT);
       if ($stmt->execute()) {
         if ($stmt->rowCount() >= 1) {
           $perms = $stmt->fetchAll(PDO::FETCH_ASSOC);
