@@ -43,7 +43,11 @@ try {
               }
             }
             break; //partner/uuid/perms
-          case "gyms": $api_controller->getGyms();
+          case "gyms":
+            if (empty($url[2]))
+              $api_controller->getGyms();
+            else
+              $api_controller->getGymsFiltred($url[2]);
             break;
           case "gym":
             if (empty($url[2]))

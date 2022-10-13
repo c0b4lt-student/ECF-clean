@@ -15,7 +15,7 @@
       } else
         throw new Exception("pdo->execute($req) failed");
     }
-    public function getDBpartnersFiltred($filter) {
+    public function getDBPartnersFiltered($filter) {
       $req = "SELECT * FROM partners
                 WHERE partners.firstname_partner ILIKE :filter
                 OR partners.lastname_partner ILIKE :filter
@@ -118,6 +118,23 @@
           throw new Exception("pdo->execute($req) : aucuns resultat");
       } else
         throw new Exception("pdo->execute($req) failed");
+    }
+    public function getDBGymsFiltered($filter) {
+      $req = "SELECT * FROM gyms
+                WHERE gyms.name_gym ILIKE :filter
+                OR gyms.addr_gym ILIKE :filter
+                OR gyms.city_gym ILIKE :filter";
+      $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':filter', '%'.$filter.'%');
+      if ($stmt->execute()) {
+        if ($stmt->rowCount() >= 1) {
+          $gyms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          $stmt->closeCursor();
+          return $gyms;
+        } else {
+          throw new Exception("Aucune salle trouvé");
+        }
+      }
     }
     public function getDBGym($id_gym) {
       if (!ctype_digit($id_gym) || $id_gym == 0)

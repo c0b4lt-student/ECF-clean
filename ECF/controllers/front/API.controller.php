@@ -13,8 +13,8 @@ require_once __DIR__."/../../models/Model.php";
       $partners = $this->requester->getDBPartners();
       Model::sendJSON($partners);
     }
-    public function getPartnersFiltred($filter) {
-      $partners = $this->requester->getDBPartnersFiltred($filter);
+    public function getPartnersFiltered($filter) {
+      $partners = $this->requester->getDBPartnersFiltered($filter);
       Model::sendJSON($partners);
     }
     public function getPartner($id_partner) {
@@ -36,6 +36,10 @@ require_once __DIR__."/../../models/Model.php";
 
     public function getGyms() {
       $gyms = $this->requester->getDBGyms();
+      Model::sendJSON($gyms);
+    }
+    public function getGymsFiltered($filter) {
+      $gyms = $this->requester->getDBGymsFiltered(filter);
       Model::sendJSON($gyms);
     }
     public function getGym($id_gym) {
