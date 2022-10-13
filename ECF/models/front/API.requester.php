@@ -17,9 +17,9 @@
     }
     public function getDBpartnersFiltred($filter) {
       $req = "SELECT * FROM partners
-                WHERE partners.firstname_partner LIKE :filter
-                OR partners.lastname_partner LIKE :filter
-                OR partners.email_partner LIKE :filter";
+                WHERE partners.firstname_partner ILIKE :filter
+                OR partners.lastname_partner ILIKE :filter
+                OR partners.email_partner ILIKE :filter";
       $stmt = $this->getDB()->prepare($req);
       $stmt->bindValue(':filter', '%'.$filter.'%');
       if ($stmt->execute()) {
