@@ -75,5 +75,5 @@ try {
   }
 } catch (Exception $e) {
     $msg =$e->getMessage();
-    echo "";
+    Model::sendJSON(null);
 }
