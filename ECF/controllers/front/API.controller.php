@@ -39,7 +39,7 @@ require_once __DIR__."/../../models/Model.php";
       Model::sendJSON($gyms);
     }
     public function getGymsFiltered($filter) {
-      $gyms = $this->requester->getDBGymsFiltered(filter);
+      $gyms = $this->requester->getDBGymsFiltered($filter);
       Model::sendJSON($gyms);
     }
     public function getGym($id_gym) {
