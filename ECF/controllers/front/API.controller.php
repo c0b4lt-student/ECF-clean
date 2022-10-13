@@ -13,6 +13,10 @@ require_once __DIR__."/../../models/Model.php";
       $partners = $this->requester->getDBPartners();
       Model::sendJSON($partners);
     }
+    public function getPartnersFiltred($filter) {
+      $partners = $this->requester->getDBPartnersFiltred($filter);
+      Model::sendJSON($partners);
+    }
     public function getPartner($id_partner) {
       $partner = $this->requester->getDBPartner($id_partner);
       Model::sendJSON($partner);

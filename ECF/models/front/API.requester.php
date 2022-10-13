@@ -15,6 +15,23 @@
       } else
         throw new Exception("pdo->execute($req) failed");
     }
+    public function getDBpartnersFiltred($filter) {
+      $req = "SELECT * FROM partners
+                WHERE partners.firstname_partner LIKE :filter
+                OR partners.lastname_partner LIKE :filter
+                OR partners.email_partner LIKE :filter";
+      $stmt = $this->getDB()->prepare($req);
+      $stmt->bindValue(':filter', '%'.$filter.'%');
+      if ($stmt->execute()) {
+        if ($stmt->rowCount() >= 1) {
+          $partners = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          $stmt->closeCursor();
+          return $partners;
+        } else {
+          throw new Exception("Aucuns partenaires trouvé");
+        }
+      }
+    }
     public function getDBPartner($partner_id) {
       if (!ctype_digit($partner_id) || $partner_id == 0)
         throw new Exception('Parametre invalide');

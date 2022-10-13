@@ -18,7 +18,12 @@ try {
     switch ($url[0]) {
       case "front" :
         switch ($url[1]) {
-          case "partners": $api_controller->getPartners();
+          case "partners":
+            if (empty($url[2]))
+              $api_controller->getPartners();
+            else {
+              $api_controller->getPartnersFiltred($url[2]);
+            }
             break;
           case "partner":
             if (empty($url[2]))
@@ -70,5 +75,5 @@ try {
   }
 } catch (Exception $e) {
     $msg =$e->getMessage();
-    echo $msg;
+    echo "err";
 }
