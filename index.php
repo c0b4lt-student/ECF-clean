@@ -22,7 +22,7 @@ try {
             if (empty($url[2]))
               $api_controller->getPartners();
             else {
-              $api_controller->getPartnersFiltred($url[2]);
+              $api_controller->getPartnersFiltered($url[2]);
             }
             break;
           case "partner":
@@ -47,7 +47,7 @@ try {
             if (empty($url[2]))
               $api_controller->getGyms();
             else
-              $api_controller->getGymsFiltred($url[2]);
+              $api_controller->getGymsFiltered($url[2]);
             break;
           case "gym":
             if (empty($url[2]))
