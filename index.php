@@ -5,8 +5,6 @@
   //URL me permet d'ecrire le debut de l url de mon site qui est toujours http|https://nomDeLhote(heroku)/backend/
   //Pour simplifier les requettes lors de la demande de ressources exemple : URL/partner ou URL/gyms ou encore URL/permissions
 
-require_once "init_db.php";
-require_once "populate_db.php";
 require_once __DIR__ . "/ECF/controllers/front/API.controller.php";
 $api_controller = new APIController();
 try {
