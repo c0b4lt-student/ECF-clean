@@ -1,36 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
-@c0b4lt-student
-This repository has been archived by the owner on Oct 18, 2022. It is now read-only.
-c0b4lt-student /
-Go_sport_first_try
-Private archive
-
-Cannot fork because you own this repository and are not a member of any organizations.
-
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-
-Settings
-
-Beta Try the new code view
-Go_sport_first_try/src/php/scripts_init_db/create_empty_tables.php /
-@c0b4lt-student
-c0b4lt-student removed verbose from script php populate table
-Latest commit 03a74aa Oct 4, 2022
-History
-1 contributor
-80 lines (78 sloc) 3.54 KB
 <?php
 $create_requests = [
     'Admins' =>     'DROP TABLE IF EXISTS admins;
